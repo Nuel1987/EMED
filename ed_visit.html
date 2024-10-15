@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Visit</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to CSS for styling -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <img src="images/logo1.png" width="150" height="60" alt="eMed Logo">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="visit.html">Visit</a></li>
+                    <li><a href="provider.html">Provider</a></li>
+                    <li><a href="discharges.html">Discharges</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="main">
+        <div class="container">
+            <h2>Emergency Visit Form</h2>
+            <form id="edvisitForm" action="/ed_visit" method="POST" onsubmit="return validateForm()">
+                <div class="input-group">
+                    <label for="visit_id">Visit ID:</label>
+                    <input type="text" id="visit_id" name="visit_id" required aria-label="Visit ID">
+                </div>
+                <div class="input-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="text" id="patient_id" name="patient_id" required aria-label="Patient ID">
+                </div>
+                <div class="input-group">
+                    <label for="acuity">Acuity:</label>
+                    <input type="text" id="acuity" name="acuity" required aria-label="Acuity">
+                </div>
+                <div class="input-group">
+                    <label for="r_visit">Reason for Visit:</label>
+                    <input type="text" id="r_visit" name="r_visit" required aria-label="Reason for Visit">
+                </div>
+                <div class="input-group">
+                    <label for="ed_disposition">ED Disposition:</label>
+                    <select id="ed_disposition" name="ed_disposition" required aria-label="ED Disposition">
+                        <option value="">Please select</option>
+                        <option value="admitted">Admitted</option>
+                        <option value="discharged">Discharged</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
+                <p>Contact Us <br>+233249126494<br>+233203584285</p>
+            </div>
+            <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+            <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function validateForm() {
+            const visitId = document.getElementById('visit_id').value;
+            const patientId = document.getElementById('patient_id').value;
+            const acuity = document.getElementById('acuity').value;
+            const reasonForVisit = document.getElementById('r_visit').value;
+
+            // Simple validation checks
+            if (!visitId || !patientId || !acuity || !reasonForVisit) {
+                alert('Please fill out all fields.');
+                return fals

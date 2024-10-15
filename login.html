@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleMed(KobbyNuel) - Login </title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <a href="index.html"> <img src="images/logo1.png" alt="logo" width="150" height="55"> </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Login Section -->
+    <section class="main">
+        <div class="login-container">
+            <h2>USER LOGIN</h2>
+            <form id="loginForm" action="/login" method="POST">
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="email-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="error" id="password-error"></div>
+                </div>
+                <div id="error-message" class="error"></div> <!-- Placeholder for error message -->
+                <div class="input-group">
+                    <button type="submit">Log In</button>
+                </div>
+                <p class="register-link">Don’t have an account? <a href="register.html">Register here</a></p>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
+            <p>Contact Us <br>+233249126494<br>+233203584285</p>
+        </div>
+        <p>&copy; 2024 KobbyNuel TeleMed. All rights reserved.</p>
+        <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+    </footer>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KobbyNuel TeleMed: A Comprehensive Telemedicine Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles3.css">
+    <style>
+        /* Chatbox styles for the AI doctor */
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-log {
+            max-height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+        .chat-log p {
+            margin: 5px 0;
+        }
+        .chat-input {
+            margin-top: 10px;
+        }
+        /* Button hover effects */
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> <img src="images/logo1.png" alt="logo" width="150" height="60"> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ai-doctor">AI Doctor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI Doctor Section -->
+    <section id="ai-doctor" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Ask Our AI Doctor</h2>
+            <div class="chat-container">
+                <div class="chat-log" id="chat-log">
+                    <!-- Chat log will appear here -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" class="form-control" placeholder="Ask the AI doctor..." aria-label="AI Doctor Input">
+                    <button class="btn btn-primary mt-2" onclick="submitQuestion()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="text-center">eMed</h2>
+            <p class="text-center lead">
+                TeleMed is a modern telemedicine platform that connects patients with healthcare providers virtually, 
+                offering convenient and accessible healthcare services.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Services</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <h3><a href="virtual.html">Virtual Consultations</a></h3>
+                        <p>Connect with doctors online for virtual consultations, from the comfort of your home.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <h3>Health Center Locator</h3>
+                        <p>Find nearby health centers using location-based services integrated with Google Maps.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <h3><a href="admission.html">Appointment Booking</a></h3>
+                        <p>Book, reschedule, or cancel appointments with healthcare providers directly through the platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="cta" class="py-5 text-white text-center" style="background-color: #007bff;">
+        <div class="container">
+            <h2>Get Started with KobbyNuel TeleMed Today!</h2>
+            <p>Access healthcare services anytime, anywhere.</p>
+            <a href="login.html" class="btn btn-outline-light btn-lg">Login</a>
+            <a href="register.html" class="btn btn-light btn-lg">Register</a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+            <p>Contact Us <br>+233249126494<br>+233203584285</p>
+        </div>
+    </footer>
+
+    <!-- AI Doctor Script -->
+    <script>
+        function submitQuestion() {
+            const userInput = document.getElementById('user-input').value;
+            const chatLog = document.getElementById('chat-log');
+            
+            if (userInput.trim() === "") {
+                alert("Please enter a question before submitting."); // Alert for empty input
+                return;
+            }
+
+            // Display user's question in the chat log
+            chatLog.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById('user-input').value = ""; // Clear input field immediately
+
+            // Simulated AI response (You would replace this part with actual AI logic or API call)
+            chatLog.innerHTML += `<p><strong>AI Doctor:</strong> Typing...</p>`;
+            const aiResponsePlaceholder = chatLog.lastChild; // Keep reference to the last message for replacement
+
+            // Simulated delay for AI response
+            setTimeout(() => {
+                const aiResponse = getAIResponse(userInput);
+                aiResponsePlaceholder.innerHTML = `<strong>AI Doctor:</strong> ${aiResponse}`;
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }, 1000);
+        }
+
+        function getAIResponse(userInput) {
+            // Basic responses for the demo (replace with real AI functionality)
+            if (userInput.toLowerCase().includes("headache")) {
+                return "It sounds like you might have a tension headache. Make sure to stay hydrated and rest.";
+            } else if (userInput.toLowerCase().includes("fever")) {
+                return "A fever can be a sign of an infection. Consider monitoring your temperature and staying hydrated.";
+            } else if (userInput.toLowerCase().includes("cold")) {
+                return "Get plenty of rest to help your body fight off the virus. Drink water, herbal teas or broths to stay hydrated and soothe a sore throat.";
+            } else {
+                return "I'm not sure about that. You should consult with a healthcare professional for more accurate advice.";
+            }
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

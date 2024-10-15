@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions Dashboard</title>
+    <link rel="stylesheet" href="css/styles4.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <img src="images/logo1.png" width="150" height="60">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Admissions Dashboard</h1>
+        </header>
+
+<!-- Filter/Search Input -->
+    <section class="filter-section">
+        <label for="filter-input">Search Admissions:</label>
+        <input type="text" id="filter-input" placeholder="Search by any field...">
+        <button class="search" type="submit">::Search::</button>
+    </section>
+
+        <!-- Appointment Booking Form -->
+        <section class="appointment-form-section">
+            <h2>Book an Appointment</h2>
+            <form id="appointment-form">
+                <div class="form-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="text" id="patient_id" name="patient_id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="admission_date">Admission Date:</label>
+                    <input type="date" id="admission_date" name="admission_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Service:</label>
+                    <select id="service" name="service" required>
+                        <option value="Select">Please select</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="General_medicine">General Medicine</option>
+                        <option value="ICU">ICU</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="primary_diagnosis">Primary Diagnosis:</label>
+                    <input type="text" id="primary_diagnosis" name="primary_diagnosis" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultation_time">Preferred Time:</label>
+                    <input type="time" id="consultation_time" name="consultation_time" required>
+                </div>
+                <button class="appointment-submit" type="submit">Book Appointment</button>
+            </form>
+        </section>
+
+        <!-- Admissions Table -->
+        <section class="admissions-table-section">
+            <h2>Admission Records</h2>
+            <table class="admissions" id="admissions">
+                <thead>
+                    <tr>
+                        <th>Admission ID</th>
+                        <th>Patient ID</th>
+                        <th>Admission Date</th>
+                        <th>Service</th>
+                        <th>Primary Diagnosis</th>
+                        <th>time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Admissions will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Script to handle form submission and table updates -->
+    <script>
+        const form = document.getElementById('appointment-form');
+        const table = document.getElementById('admissions').getElementsByTagName('tbody')[0];
+        let admissionId = 1; // Mock auto-increment for local demo
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Gather form data
+            const patientId = document.getElementById('patient_id').value;
+            const admissionDate = document.getElementById('admission_date').value;
+            const service = document.getElementById('service').value;
+            const primaryDiagnosis = document.getElementById('primary_diagnosis').value;
+
+            // Insert new row in admissions table
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>${admissionId++}</td>
+                <td>${patientId}</td>
+                <td>${admissionDate}</td>
+                <td>${service}</td>
+                <td>${primaryDiagnosis}</td>
+            `;
+
+            // Clear the form after submission
+            form.reset();
+        });
+    </script>
+
+<footer>
+    <div class="footer-content">
+        <div id="contact" class="section"></div>
+            <p>Contact Us <br>+233249126494<br>+233203584285</p>
+        </div>
+        <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+        <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
+

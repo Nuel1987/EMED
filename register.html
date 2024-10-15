@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMed - Register</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html"><img src="images/logo1.png" alt="logo" width="150" height="55"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="main">
+        <div class="container">
+            <h2>USER REGISTRATION</h2>
+            <form id="registerForm" >
+                <div class="input-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                    <div class="error" id="first-name-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                    <div class="error" id="last-name-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="email-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" autocomplete="off" required>
+                    <div class="error" id="password-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <div class="error" id="confirm-password-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="Select">Select an option</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Patient">Patient</option>
+                        <option value="Doctor">Doctor</option>
+                    </select>
+                    <div class="error" id="role-error"></div>
+                </div>
+                <div class="input-group">
+                    <input type="checkbox" id="terms" name="terms">
+                    <label for="terms">I Accept Terms and Conditions</label>
+                    <div class="error" id="terms-error"></div>
+                </div>
+                <button type="submit">Register</button>
+                <p class="login-link">Already have an account? <a href="login.html">Log in here</a></p>
+            </form>
+
+            <table id="userTable" border="1">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be added here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+
+            // Clear previous error messages
+            clearErrors();
+
+            // Gather form data
+            const firstName = document.getElementById('first_name').value.trim();
+            const lastName = document.getElementById('last_name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirm-password').value.trim();
+            const role = document.getElementById('role').value;
+            const terms = document.getElementById('terms').checked;
+
+            
+        // Console log the data before submitting
+            console.log({ firstName, lastName, email, password, role, terms })
+            // Form validation logic
+            let valid = true;
+
+            // Name validation
+            if (firstName === '' || firstName.length < 4) {
+                displayError('first-name-error', 'First name must be at least 4 characters.');
+                valid = false;
+            }
+            if (lastName === '' || lastName.length < 4) {
+                displayError('last-name-error', 'Last name must be at least 4 characters.');
+                valid = false;
+            }
+
+            // Email validation
+            if (email === '' || !validateEmail(email)) {
+                displayError('email-error', 'Please enter a valid email address.');
+                valid = false;
+            }
+
+            // Password validation
+            if (password === '' || !validatePassword(password)) {
+                displayError('password-error', 'Password must be at least 8 characters and include letters and numbers.');
+                valid = false;
+            }
+
+            // Confirm password validation
+            if (confirmPassword === '' || password !== confirmPassword) {
+                displayError('confirm-password-error', 'Passwords do not match.');
+                valid = false;
+            }
+
+            // Role validation
+            if (role === 'Select') {
+                displayError('role-error', 'Please select a role.');
+                valid = false;
+            }
+
+            // Terms validation
+            if (!terms) {
+                alert('Please accept the terms and conditions.');
+                valid = false;
+            }
+
+            // If form is valid, insert new row in the user table
+            if (valid) {
+                const newRow = table.insertRow();
+                newRow.innerHTML = `
+                    <td>${firstName}</td>
+                    <td>${lastName}</td>
+                    <td>${email}</td>
+                    <td>${role}</td>
+                `;
+                alert('Registration successful!');
+                form.reset();
+            }
+        });
+
+        // Helper functions
+        function clearErrors() {
+            document.getElementById('first-name-error').textContent = '';
+            document.getElementById('last-name-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('password-error').textContent = '';
+            document.getElementById('confirm-password-error').textContent = '';
+            document.getElementById('role-error').textContent = '';
+            document.getElementById('terms-error').textContent = '';
+        }
+
+        function displayError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        function validatePassword(password) {
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+            return passwordPattern.test(password);
+        }
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
+                <p>Contact Us <br>+233249126494<br>+233203584285</p>
+            </div>
+            <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+            <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>

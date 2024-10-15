@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Registration</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to CSS for styling -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <img src="images/logo1.png" width="150" height="60">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="visit.html">Visit</a></li>
+                    <li><a href="ed_visit.html">Ed Visit</a></li>
+                    <li><a href="discharges.html">Discharges</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="main">
+        <div class="container">
+            <h2>PROVIDER REGISTRATION FORM</h2>
+            <form id="providerForm">
+                <div class="input-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                    <div class="error" id="first-name-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                    <div class="error" id="last-name-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="provider_specialty">Provider Specialty:</label>
+                    <input type="text" id="provider_specialty" name="provider_specialty" required>
+                    <div class="error" id="specialty-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="email-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="phone_number" name="phone_number" required>
+                    <div class="error" id="phone-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="date">Date Joined:</label>
+                    <input type="date" id="date" name="date_joined" required>
+                    <div class="error" id="date-error"></div>
+                </div>
+                <div class="input-group">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
+                <p>Contact Us <br>+233249126494<br>+233203584285</p>
+            </div>
+            <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+            <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+    <script src="js/provider.js"></script>
+</body>
+</html>

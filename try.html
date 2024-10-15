@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Center Locator</title>
+    <style>
+        /* Fullscreen map container */
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Search Box Styling */
+        #search-box {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            background-color: white;
+            z-index: 5;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Ensure mobile responsiveness */
+        @media (max-width: 600px) {
+            #search-box {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="search-box">
+        <input id="pac-input" class="controls" type="text" placeholder="Enter a location to find health centers">
+    </div>
+    <div id="map"></div>
+
+    <!-- Load Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script>
+        let map;
+        let service;
+        let infowindow;
+        let markers = []; // Initialize the markers array
+
+        function initMap() {
+            // Initialize the map centered at user's location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const userLocation = new google.maps.LatLng(
+                            position.coords.latitude, position.coords.longitude
+                        );
+
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: userLocation,
+                            zoom: 14
+                        });
+
+                        // Create the search box and link it to the input element
+                        const input = document.getElementById('pac-input');
+                        const searchBox = new google.maps.places.SearchBox(input);
+                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                        // Bias the SearchBox results towards current map's viewport
+                        map.addListener('bounds_changed', function() {
+                            searchBox.setBounds(map.getBounds());
+                        });
+
+                        // Place search
+                        service = new google.maps.places.PlacesService(map);
+                        infowindow = new google.maps.InfoWindow();
+
+                        // Search for health centers
+                        searchHealthCenters(userLocation);
+
+                        // Listen for user search input
+                        searchBox.addListener('places_changed', function() {
+                            const places = searchBox.getPlaces();
+                            if (places.length == 0) return;
+
+                            // Clear old markers
+                            clearMarkers();
+
+                            // Set the new bounds and search around it
+                            let bounds = new google.maps.LatLngBounds();
+                            places.forEach(function(place) {
+                                if (!place.geometry) return;
+                                if (place.geometry.viewport) {
+                                    bounds.union(place.geometry.viewport);
+                                } else {
+                                    bounds.extend(place.geometry.location);
+                                }
+                            });
+
+                            map.fitBounds(bounds);
+                            searchHealthCenters(map.getCenter());
+                        });
+                    },
+                    function() {
+                        handleLocationError(true, map.getCenter());
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, map.getCenter());
+            }
+        }
+
+        function searchHealthCenters(location) {
+            const request = {
+                location: location,
+                radius: '5000',  // 5 km radius
+                type: ['hospital']  // can be changed 'hospital' to 'doctor', 'clinic', etc.
+            };
+
+            service.nearbySearch(request, function(results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    for (let i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                    }
+                } else {
+                    infowindow.setContent('No health centers found in this area.');
+                    infowindow.setPosition(location);
+                    infowindow.open(map);
+                }
+            });
+        }
+
+        // Creates a marker for each health center found
+        function createMarker(place) {
+            const marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+            markers.push(marker); // Add marker to the markers array
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(`<div><strong>${place.name}</strong><br>
+                ${place.vicinity}</div>`);
+                infowindow.open(map, this);
+            });
+        }
+
+        // Clear old markers (if any)
+        function clearMarkers() {
+            if (markers) {
+                markers.forEach(marker => marker.setMap(null));
+                markers = [];
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, pos) {
+            infowindow.setPosition(pos);
+            infowindow.setContent(browserHasGeolocation
+                ? 'Error: The Geolocation service failed.'
+                : 'Error: Your browser doesn\'t support geolocation.');
+            infowindow.open(map);
+        }
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>

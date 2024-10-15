@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to CSS for styling -->
+</head>
+<body>
+     <!-- Navigation Bar -->
+     <header>
+        <div class="navbar">
+            <h1>eMed</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="main">
+        <div class="container">
+            <h2>Patient Registration Form</h2>
+            <form id="patientForm">
+                <div class="input-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="text" id="patient_id" name="patient_id" required>
+                    <div class="error" id="patient-id-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                    <div class="error" id="first-name-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                    <div class="error" id="last-name-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input type="date" id="date_of_birth" name="date_of_birth" required>
+                    <div class="error" id="dob-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="error" id="gender-error"></div>
+                </div>
+                <div class="input-group">
+                    <button type="submit">Register Patient</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
+                <p>Contact Us <br>+233249126494<br>+233203584285</p>
+            </div>
+            <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+            <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('patientForm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Clear previous error messages
+            clearErrors();
+
+            // Gather form data
+            const patientID = document.getElementById('patient_id').value.trim();
+            const firstName = document.getElementById('first_name').value.trim();
+            const lastName = document.getElementById('last_name').value.trim();
+            const dob = document.getElementById('date_of_birth').value.trim();
+            const gender = document.getElementById('gender').value;
+
+            // Validate data
+            let valid = true;
+
+            // Example validation for Patient ID
+            if (patientID.length < 1) {
+                displayError('patient-id-error', 'Patient ID is required.');
+                valid = false;
+            }
+            // Name validation
+            if (firstName.length < 2) {
+                displayError('first-name-error', 'First name must be at least 2 characters.');
+                valid = false;
+            }
+            if (lastName.length < 2) {
+                displayError('last-name-error', 'Last name must be at least 2 characters.');
+                valid = false;
+            }
+            // Date of Birth validation
+            if (dob === '') {
+                displayError('dob-error', 'Date of Birth is required.');
+                valid = false;
+            }
+            // Gender validation
+            if (gender === '') {
+                displayError('gender-error', 'Please select a gender.');
+                valid = false;
+            }
+
+            // If valid, process the form (you can replace this with an AJAX call or any logic you want)
+            if (valid) {
+                alert('Patient registered successfully!'); // Replace this with your desired action
+                form.reset(); // Reset the form after submission
+            }
+        });
+
+        function clearErrors() {
+            document.getElementById('patient-id-error').textContent = '';
+            document.getElementById('first-name-error').textContent = '';
+            document.getElementById('last-name-error').textContent = '';
+            document.getElementById('dob-error').textContent = '';
+            document.getElementById('gender-error').textContent = '';
+        }
+
+        function displayError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+    </script>
+</body>
+</html>

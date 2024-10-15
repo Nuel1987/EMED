@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions Dashboard</title>
+    <link rel="stylesheet" href="css/styles5.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <h3>eMed</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Discharge Dashboard</h1>
+        </header>
+
+        <!-- Filter/Search Input -->
+        <section class="filter-section">
+            <label for="filter-input">Search Admissions:</label>
+            <input type="text" id="filter-input" placeholder="Search by any field...">
+            <button class="search" type="submit">::Search::</button>
+        </section>
+
+        <!-- Discharge Form -->
+        <section class="discharge-form-section">
+            <h2>Patient on Discharge</h2>
+            <form id="discharge-form">
+                <div class="form-group">
+                    <label for="admission_id">Admission ID:</label>
+                    <input type="text" id="admission_id" name="admission_id" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="text" id="patient_id" name="patient_id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="admission_date">Admission Date:</label>
+                    <input type="date" id="admission_date" name="admission_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="discharge_date">Discharge Date:</label>
+                    <input type="date" id="discharge_date" name="discharge_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="discharge_disposition">Discharge Disposition:</label>
+                    <select id="discharge_disposition" name="discharge_disposition" required>
+                        <option value="">Please select</option>
+                        <option value="expired">Expired</option>
+                        <option value="home">Home</option>
+                        <option value="transfer">Transfer</option>
+                    </select>
+                </div>
+
+                <button class="appointment-submit" type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Discharges Table -->
+        <section class="discharges-table-section">
+            <h2>Discharge Records</h2>
+            <table class="discharges" id="discharges">
+                <thead>
+                    <tr>
+                        <th>Discharge ID</th>
+                        <th>Admission ID</th>
+                        <th>Patient ID</th>
+                        <th>Admission Date</th>
+                        <th>Discharge Disposition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Admissions will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Script to handle form submission and table updates -->
+    <script>
+        const form = document.getElementById('discharge-form'); // Corrected to match the form ID
+        const table = document.getElementById('discharges').getElementsByTagName('tbody')[0];
+        let dischargeId = 1; // Mock auto-increment for local demo
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Gather form data
+            const admissionId = document.getElementById('admission_id').value;
+            const patientId = document.getElementById('patient_id').value;
+            const admissionDate = document.getElementById('admission_date').value;
+            const dischargeDisposition = document.getElementById('discharge_disposition').value;
+
+            // Insert new row in admissions table
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>${dischargeId++}</td>
+                <td>${admissionId}</td>
+                <td>${patientId}</td>
+                <td>${admissionDate}</td>
+                <td>${dischargeDisposition}</td>
+            `;
+
+            // Clear the form after submission
+            form.reset();
+        });
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
+            <p>Contact Us <br>+233249126494<br>+233203584285</p>
+        </div>
+        <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+        <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+    </footer>
+</body>
+</html>

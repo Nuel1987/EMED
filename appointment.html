@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Dashboard</title>
+    <link rel="stylesheet" href="css/appoint.css">
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html"><img src="images/logo1.png" alt="logo" width="150" height="55"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h2>Appointments Dashboard</h2>
+
+            <!-- Filters Section -->
+            <div class="filters">
+                <label for="filterDate">Filter by Date:</label>
+                <input type="date" id="filterDate">
+
+                <label for="filterDoctor">Filter by Doctor:</label>
+                <select id="filterDoctor">
+                    <option value="All">All Doctors</option>
+                    <option value="D001">Doctor 001</option>
+                    <option value="D002">Doctor 002</option>
+                </select>
+
+                <label for="filterStatus">Filter by Status:</label>
+                <select id="filterStatus">
+                    <option value="All">All Statuses</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Canceled">Canceled</option>
+                </select>
+
+                <button id="filterButton">Filter</button>
+            </div>
+
+            <!-- Appointments Table -->
+            <table id="appointmentsTable" border="1">
+                <thead>
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Patient ID</th>
+                        <th>Doctor ID</th>
+                        <th>Admission Date</th>
+                        <th>Service</th>
+                        <th>Primary Diagnosis</th>
+                        <th>Consultation Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td><span class="status confirmed"></span></td>
+                        <td>
+                            <button class="view-btn">View</button>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+    </footer>
+
+    <script src="js/appointments.js"></script>
+</body>
+</html>
