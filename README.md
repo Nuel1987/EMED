@@ -20,4 +20,4 @@ A web-based telemedicine platform designed to connect patients with doctors, off
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Nuel1987/EMED
+   git clone https://github.com/Nuel1987/EMED.git
