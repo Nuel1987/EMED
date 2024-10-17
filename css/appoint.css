@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 0;
+}
+
+.navbar img {
+    float: left;
+    margin-left: 20px;
+}
+
+.navbar nav ul {
+    list-style-type: none;
+    float: right;
+    margin-right: 20px;
+}
+
+.navbar nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.navbar nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container {
+    margin: 20px;
+}
+
+h2 {
+    color: #007bff;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+#appointmentsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#appointmentsTable th, #appointmentsTable td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status.confirmed {
+    background-color: #28a745;
+    color: white;
+}
+
+.status.pending {
+    background-color: #ffc107;
+    color: black;
+}
+
+.status.canceled {
+    background-color: #dc3545;
+    color: white;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

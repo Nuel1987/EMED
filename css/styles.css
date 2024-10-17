@@ -1,0 +1,218 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ddd;
+    color:#333;
+    justify-content: center;
+    align-items: relative;
+}
+
+/* Header and Navigation Bar */
+header {
+    background-color: #1105fc;
+    padding: 20px 0;
+    color: white; 
+}
+
+.navbar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    padding: 10px 0;
+}
+
+.navbar h1 {
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0px;
+}
+
+nav ul li a {
+    color: rgb(251, 248, 248);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.main{
+   background: url('../images/hosp.jpg') center;
+   background-size: cover;
+}
+.container {
+    background-color: rgb(204, 225, 249);
+    text-align: center;
+    padding: 80px 20px;
+    margin: auto;
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.login-container {
+    background-color: #ffffffc6;
+    padding: 20px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    max-width: 800px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"], 
+input[type="date"],
+input[type="number"]  {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {width: 100%;
+    padding: 10px;
+    background-color: #1105fc;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1105fc;
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #1105fc;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+#userTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#userTable th {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#userTable th {
+    background-color: #1105fc;
+    color: white;
+}
+
+#userTable tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+#userTable tr:hover {
+    background-color: #e0f0ff;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.footer-content a {
+    color: #1105fc;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer-content a:hover {
+    color: #0056b3;
+}
+
+footer p {
+    margin: 10px 0;
+}
+.section {
+    padding: 0px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+/* media queries for responsiveness */
+
+/* larger screens>768px */
+@media (min-width: 768px) {
+    .box{
+        flex: 1 1 30%;
+    }
+}
+
+/* screes smaller than 768px */
+@media (max-width: 768px) {
+    .box {
+        flex: 1 1 45%;
+    }
+}
+
+/* screens smaller than 480px */
+@media (max-width: 480px) {
+    .box{
+        flex:1 1 100%;
+    }
+}

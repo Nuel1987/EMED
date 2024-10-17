@@ -1,0 +1,46 @@
+<title><%= title %></title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+    </style>
+
+<h1><%= title %></h1>
+
+    <% if (data.length === 0) { %>
+        <p>No data available</p>
+    <% } else { %>
+
+<table border="1">
+    <thead>
+        <tr>
+            <% if (title === "Patients") { %>
+            <!-- <th> Patient ID </th> -->
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Date of Birth </th>
+            <% } %>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach(row => {%>
+            <tr>
+                <% if (title === "Patients") { %>
+                <!-- <td> <%= row.patient_id %> </td> -->
+                <td> <%= row.first_name %> </td>
+                <td> <%= row.last_name %> </td>
+                <td> <%= row.date_of_birth %> </td>
+                <% } %>
+            </tr>
+        <%}); %>
+    </tbody>
+</table>
+<% } %>

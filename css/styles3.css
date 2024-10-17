@@ -1,0 +1,58 @@
+/* Hero Section Styling */
+.hero-section {
+    background: url('hosp.jpg') no-repeat center fixed;
+    height: 100vh;
+    position: relative;
+    background-size: cover;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+
+
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.service-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.service-box:hover {
+    transform: translateY(-5px);
+}
+/* media queries for responsiveness */
+
+/* larger screens>768px */
+@media (min-width: 768px) {
+    .box{
+        flex: 1 1 30%;
+    }
+}
+
+/* screes smaller than 768px */
+@media (max-width: 768px) {
+    .box {
+        flex: 1 1 45%;
+    }
+}
+
+/* screens smaller than 480px */
+@media (max-width: 480px) {
+    .box{
+        flex:1 1 100%;
+    }
+}

@@ -1,0 +1,4 @@
+mkdir hospital
+cd hospital
+npm init -y
+npm install express mysql bcryptjs jsonwebtoken body-parser cors
