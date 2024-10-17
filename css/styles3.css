@@ -1,6 +1,11 @@
 /* Hero Section Styling */
+.main{
+    background: url('../images/hospital2.jpg') no-repeat fixed center;
+    background-size: cover;
+}
+
+
 .hero-section {
-    background: url('hosp.jpg') no-repeat center fixed;
     height: 100vh;
     position: relative;
     background-size: cover;
@@ -14,13 +19,13 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-
-
 }
 
 .hero-section .container {
+    text-align: left;
     position: relative;
     z-index: 1;
+    
 }
 
 .service-box {
