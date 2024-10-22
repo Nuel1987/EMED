@@ -1,22 +1,24 @@
-//import and create authetication functions
+// Import and create authentication functions
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 
-
-//user registration function (logic)
+// User registration function (logic)
 exports.registerUser = async (request, response) => {
-    //fetch data
+    // Fetch data
     const { first_name, last_name, email, password, role } = request.body;
-    try{
-        //check if user exists in the database - use email address
-        const [rows] = await db.execute('SELECT * FROM user_reg WHERE email = ?', [email])
-        if(rows.length > 0){
-            return response.status(400).json({ message: 'User already exists!'});
+
+    // Log values to check for undefined fields
+    console.log({ first_name, last_name, email, password, role });
+    try {
+        // Check if user exists in the database - use email address
+        const [rows] = await db.execute('SELECT * FROM user_reg WHERE email = ?', [email]);
+        if (rows.length > 0) {
+            return response.status(400).json({ message: 'User already exists!' });
         }
-        //hash password
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        //insert record into db table
+        // Insert record into db table
         await db.execute('INSERT INTO user_reg (first_name, last_name, email, password, role) VALUES (?,?,?,?,?)', [
             first_name,
             last_name,
@@ -24,33 +26,43 @@ exports.registerUser = async (request, response) => {
             hashedPassword,
             role
         ]);
-        response.status(201).json({ message: 'User registered successfully!'})
-    } catch(error) {
-        console.log(error)
-        response.status(500).json({ message: 'An error occured!', error });
+        response.status(201).json({ success: true, message: 'User registered successfully!' });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({ message: 'An error occurred!', error });
     }
-}
+};
 
+// User login function
 exports.loginUser = async (request, response) => {
     const { email, password } = request.body;
-    try{
-        //check if user exists
+    try {
+        // Check if user exists
         const [rows] = await db.execute('SELECT * FROM user_reg WHERE email = ?', [email]);
-        if(rows.length === 0){
-            return response.status(400).json({ message: 'User not found! Please register.'});
+        if (rows.length === 0) {
+            return response.status(400).json({ message: 'User not found! Please register.' });
         }
         const user = rows[0];
 
-        //compare the password
+        // Compare the password
         const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch){
+        if (!isMatch) {
             return response.status(400).json({ message: 'Invalid credentials!' });
         }
-        response.status(200).json({ message: 'Login successful!', name: user.name, email : user.email });
-    } catch(error) {
-        response.status(500).json({ message: 'An error occured!', error });
+
+        // Store user information in session
+        request.session.user = {
+            id: user.id, // check for the 'id' column in your user_reg table
+            name: `${user.first_name} ${user.last_name}`, // Combine first and last name
+            email: user.email,
+            role: user.role // Store the user's role
+        };
+
+        response.status(200).json({ success: true, message: 'Login successful!', user: request.session.user });
+    } catch (error) {
+        response.status(500).json({ message: 'An error occurred!', error });
     }
-}
+};
 
 // Fetch Appointments for Doctor
 exports.doctor = async (req, res) => {

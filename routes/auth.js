@@ -14,6 +14,7 @@ router.post('/register', registerUser);
 //user login 
 router.post('/login', loginUser);
 
+//user appointment
 router.post('/appointment', admin);
 
 router.post('/provider', doctor);
