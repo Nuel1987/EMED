@@ -52,7 +52,7 @@ function loginUser(email, password) {
             } else if (result.user.role === 'Doctor') {
                 window.location.href = '/doctorMgt.html';
             } else {
-                window.location.href = '/appointment.html'; // Adjust accordingly
+                window.location.href = '/patientDashboard.html'; // Adjust accordingly
             }
         } else {
             alert(result.message);

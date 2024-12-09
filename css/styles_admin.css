@@ -43,6 +43,22 @@ section {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.input-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"], 
+input[type="date"],
+input[type="number"]  {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
 
 h2 {
     border-bottom: 2px solid #34495e;
@@ -98,4 +114,25 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead {
+        display: none;
+    }
+    tr {
+        margin-bottom: 1rem;
+    }
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
 }

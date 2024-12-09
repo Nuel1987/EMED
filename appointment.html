@@ -14,7 +14,7 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="login.html">Admin Login</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="login.html">Login</a></li>
                 </ul>
@@ -34,8 +34,6 @@
                 <label for="filterDoctor">Filter by Doctor:</label>
                 <select id="filterDoctor">
                     <option value="All">All Doctors</option>
-                    <option value="D001">Doctor 001</option>
-                    <option value="D002">Doctor 002</option>
                 </select>
 
                 <label for="filterStatus">Filter by Status:</label>
@@ -65,25 +63,43 @@
                     </tr>
                 </thead>
                 <tbody>
-                  
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td><span class="status confirmed"></span></td>
-                        <td>
-                            <button class="view-btn">View</button>
-                            <button class="edit-btn">Edit</button>
-                            <button class="delete-btn">Delete</button>
-                        </td>
-                    </tr>
+                    <!-- Appointment rows will be dynamically added here -->
                 </tbody>
             </table>
         </div>
+    </section>
+
+    <!-- Edit Appointment Form (initially hidden) -->
+    <section class="edit-section">
+        <form id="edit-appointment-form" class="hidden">
+            <h3>Edit Appointment</h3>
+
+            <input type="hidden" id="appointment_id" name="appointment_id">
+
+            <label for="doctor_id">Doctor ID:</label>
+            <input type="text" id="doctor_id" name="doctor_id" required>
+
+            <label for="admission_date">Admission Date:</label>
+            <input type="date" id="admission_date" name="admission_date" required>
+
+            <label for="service">Service:</label>
+            <input type="text" id="service" name="service" required>
+
+            <label for="primary_diagnosis">Primary Diagnosis:</label>
+            <input type="text" id="primary_diagnosis" name="primary_diagnosis" required>
+
+            <label for="consultation_time">Consultation Time:</label>
+            <input type="time" id="consultation_time" name="consultation_time" required>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Canceled">Canceled</option>
+            </select>
+
+            <button type="submit">Update Appointment</button>
+        </form>
     </section>
 
     <footer>

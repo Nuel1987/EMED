@@ -183,16 +183,27 @@ footer p {
     }
 }
 
-/* screes smaller than 768px */
+/* larger screens>768px */
 @media (max-width: 768px) {
-    .box {
-        flex: 1 1 45%;
+    .navbar ul {
+    flex: 1 1  100%;
+    flex-direction:column;
+    }
+    .main h2 {
+        font-size: 1.5em;
+    }
+    .discharges table thead th{
+        display: grid;
     }
 }
 
-/* screens smaller than 480px */
+/* For mobile phones */
 @media (max-width: 480px) {
-    .box{
-        flex:1 1 100%;
+    .navbar img {
+        flex: 1 1 100%;
+        width: 100px; 
+    }
+    .main {
+        padding: 10px;
     }
 }

@@ -33,6 +33,18 @@ app.get('/login', (request, response) => {
     response.sendFile(path.join(__dirname, 'login.html'));
 });
 
+app.get('/appointment', (request, response) => {
+    response.sendFile(path.join(__dirname, 'appointment.html'));
+});
+
+app.get('/provider', (request, response) => {
+    response.sendFile(path.join(__dirname, 'provider.html'));
+});
+
+app.get('/admin/appointment', (request, response) => {
+    response.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);

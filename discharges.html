@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admissions Dashboard</title>
-    <link rel="stylesheet" href="css/styles5.css"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="css/styles5.css"> 
 </head>
 <body>
-    <!-- Navigation Bar -->
     <header>
         <div class="navbar">
             <h3>eMed</h3>
@@ -26,15 +25,12 @@
         <header>
             <h1>Discharge Dashboard</h1>
         </header>
-
-        <!-- Filter/Search Input -->
         <section class="filter-section">
             <label for="filter-input">Search Admissions:</label>
             <input type="text" id="filter-input" placeholder="Search by any field...">
             <button class="search" type="submit">::Search::</button>
         </section>
 
-        <!-- Discharge Form -->
         <section class="discharge-form-section">
             <h2>Patient on Discharge</h2>
             <form id="discharge-form">
@@ -92,7 +88,6 @@
         </section>
     </div>
 
-    <!-- Script to handle form submission and table updates -->
     <script>
         const form = document.getElementById('discharge-form'); // Corrected to match the form ID
         const table = document.getElementById('discharges').getElementsByTagName('tbody')[0];

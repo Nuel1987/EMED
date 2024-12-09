@@ -76,59 +76,13 @@
                 </div>
                 <div class="chat-input">
                     <input type="text" id="user-input" class="form-control" placeholder="Ask the AI doctor..." aria-label="AI Doctor Input">
-                    <button class="btn btn-primary mt-2" onclick="submitQuestion()">Submit</button>
+                    <button id="sendMessage" class="btn btn-primary mt-2">Submit</button>
+                    <p id="aiResponse"></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <h2 class="text-center">eMed</h2>
-            <p class="text-center lead">
-                TeleMed is a modern telemedicine platform that connects patients with healthcare providers virtually, 
-                offering convenient and accessible healthcare services.
-            </p>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Services</h2>
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <div class="service-box">
-                        <h3><a href="virtual.html">Virtual Consultations</a></h3>
-                        <p>Connect with doctors online for virtual consultations, from the comfort of your home.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-box">
-                        <h3>Health Center Locator</h3>
-                        <p>Find nearby health centers using location-based services integrated with Google Maps.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-box">
-                        <h3><a href="admission.html">Appointment Booking</a></h3>
-                        <p>Book, reschedule, or cancel appointments with healthcare providers directly through the platform.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section id="cta" class="py-5 text-white text-center" style="background-color: #007bff;">
-        <div class="container">
-            <h2>Get Started with KobbyNuel TeleMed Today!</h2>
-            <p>Access healthcare services anytime, anywhere.</p>
-            <a href="login.html" class="btn btn-outline-light btn-lg">Login</a>
-            <a href="register.html" class="btn btn-light btn-lg">Register</a>
-        </div>
-    </section>
 
     <!-- Footer Section -->
     <footer id="contact" class="bg-dark text-white py-4">
@@ -140,46 +94,44 @@
 
     <!-- AI Doctor Script -->
     <script>
-        function submitQuestion() {
-            const userInput = document.getElementById('user-input').value;
-            const chatLog = document.getElementById('chat-log');
-            
-            if (userInput.trim() === "") {
-                alert("Please enter a question before submitting."); // Alert for empty input
+        // Event listener for button click
+        document.getElementById('sendMessage').addEventListener('click', async () => {
+            const message = document.getElementById('user-input').value;
+            if (!message.trim()) {
+                alert("Please enter a message!");
                 return;
             }
 
-            // Display user's question in the chat log
-            chatLog.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-            document.getElementById('user-input').value = ""; // Clear input field immediately
+            // Clear the user input field
+            document.getElementById('user-input').value = '';
 
-            // Simulated AI response (You would replace this part with actual AI logic or API call)
-            chatLog.innerHTML += `<p><strong>AI Doctor:</strong> Typing...</p>`;
-            const aiResponsePlaceholder = chatLog.lastChild; // Keep reference to the last message for replacement
+            // Display the message in the chat log
+            const chatLog = document.getElementById('chat-log');
+            chatLog.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto scroll to the bottom
 
-            // Simulated delay for AI response
-            setTimeout(() => {
-                const aiResponse = getAIResponse(userInput);
-                aiResponsePlaceholder.innerHTML = `<strong>AI Doctor:</strong> ${aiResponse}`;
-                chatLog.scrollTop = chatLog.scrollHeight;
-            }, 1000);
-        }
+            try {
+                // Send the message to the backend
+                const response = await fetch('/auth/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
 
-        function getAIResponse(userInput) {
-            // Basic responses for the demo (replace with real AI functionality)
-            if (userInput.toLowerCase().includes("headache")) {
-                return "It sounds like you might have a tension headache. Make sure to stay hydrated and rest.";
-            } else if (userInput.toLowerCase().includes("fever")) {
-                return "A fever can be a sign of an infection. Consider monitoring your temperature and staying hydrated.";
-            } else if (userInput.toLowerCase().includes("cold")) {
-                return "Get plenty of rest to help your body fight off the virus. Drink water, herbal teas or broths to stay hydrated and soothe a sore throat.";
-            } else {
-                return "I'm not sure about that. You should consult with a healthcare professional for more accurate advice.";
+                const data = await response.json();
+                if (response.ok) {
+                    // Display AI's reply in the chat log
+                    chatLog.innerHTML += `<p><strong>AI Doctor:</strong> ${data.reply}</p>`;
+                } else {
+                    alert(data.error);
+                }
+                chatLog.scrollTop = chatLog.scrollHeight; // Auto scroll to the bottom
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Something went wrong.');
             }
-        }
+        });
     </script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

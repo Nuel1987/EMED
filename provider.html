@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provider Registration</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Link to CSS for styling -->
+    <link rel="stylesheet" href="css/styles.css"> 
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -25,7 +25,7 @@
     <section class="main">
         <div class="container">
             <h2>PROVIDER REGISTRATION FORM</h2>
-            <form id="providerForm">
+            <form id="providerForm" method="POST" action="/auth/provider">
                 <div class="input-group">
                     <label for="first_name">First Name:</label>
                     <input type="text" id="first_name" name="first_name" required>
@@ -42,8 +42,8 @@
                     <div class="error" id="specialty-error"></div>
                 </div>
                 <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email_address">Email:</label>
+                    <input type="email" id="email_address" name="email_address" required>
                     <div class="error" id="email-error"></div>
                 </div>
                 <div class="input-group">
@@ -52,8 +52,8 @@
                     <div class="error" id="phone-error"></div>
                 </div>
                 <div class="input-group">
-                    <label for="date">Date Joined:</label>
-                    <input type="date" id="date" name="date_joined" required>
+                    <label for="date_joined">Date Joined:</label>
+                    <input type="date" id="date_joined" name="date_joined" required>
                     <div class="error" id="date-error"></div>
                 </div>
                 <div class="input-group">

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/appoint.css">
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>All Appointments</h2>
+    <table id="appointmentsTable" border="1">
+        <thead>
+            <tr>
+                <th>Appointment ID</th>
+                <th>Patient ID</th>
+                <th>Doctor ID</th>
+                <th>Admission Date</th>
+                <th>Service</th>
+                <th>Primary Diagnosis</th>
+                <th>Consultation Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Appointments will be populated here -->
+        </tbody>
+    </table>
+
+    <!-- Optional: Users Management -->
+    <h2>All Users</h2>
+    <table id="usersTable" border="1">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Users will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch all appointments and display them
+        fetch('/auth/admin/appointments')
+            .then(response => response.json())
+            .then(appointments => {
+                const tableBody = document.querySelector('#appointmentsTable tbody');
+                appointments.forEach(appointment => {
+                    const row = `<tr>
+                        <td>${appointment.appointment_id}</td>
+                        <td>${appointment.patient_id}</td>
+                        <td>${appointment.doctor_id}</td>
+                        <td>${appointment.admission_date}</td>
+                        <td>${appointment.service}</td>
+                        <td>${appointment.primary_diagnosis}</td>
+                        <td>${appointment.consultation_time}</td>
+                        <td>${appointment.status}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching appointments:', error));
+
+        // Fetch all users and display them (Optional)
+        fetch('/auth/admin/users')
+            .then(response => response.json())
+            .then(users => {
+                const tableBody = document.querySelector('#usersTable tbody');
+                users.forEach(user => {
+                    const row = `<tr>
+                        <td>${user.id}</td>
+                        <td>${user.first_name}</td>
+                        <td>${user.last_name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.role}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching users:', error));
+    </script>
+</body>
+</html>

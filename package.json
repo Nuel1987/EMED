@@ -13,7 +13,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.11.3",
     "nodemon": "^3.1.7",
-    "npm": "^10.8.3"
+    "npm": "^10.8.3",
+    "openai": "^4.72.0"
   },
   "name": "telemed-application_project",
   "version": "1.0.0",

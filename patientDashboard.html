@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="css/patientdashboard.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html"><img src="images/logo1.png" alt="logo" width="150" height="55"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#profile">My Profile</a></li>
+                    <li><a href="#appointments">Appointments</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="profile">
+            <h2>My Profile</h2>
+            <div id="profile-info">
+                <!-- Profile details populated with JavaScript -->
+            </div>
+            <button onclick="showEditProfileForm()">Edit Profile</button>
+            <button onclick="deleteProfile()">Delete Profile</button>
+        </section>
+
+        <section id="appointments">
+            <h2>My Appointments</h2>
+            <button onclick="showBookingForm()">Book Appointment</button>
+            <table id="appointmentsTable">
+                <thead>
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Appointments populated with JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
+    </footer>
+
+    <script src="js/patientDashboard.js"></script>
+</body>
+</html>

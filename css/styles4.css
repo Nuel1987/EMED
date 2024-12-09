@@ -177,22 +177,21 @@ footer p {
 /* media queries for responsiveness */
 
 /* larger screens>768px */
-@media (min-width: 768px) {
-    .box{
-        flex: 1 1 30%;
-    }
-}
-
-/* screes smaller than 768px */
 @media (max-width: 768px) {
-    .box {
-        flex: 1 1 45%;
+    .navbar ul {
+        flex-direction: column;
+    }
+    .main h2 {
+        font-size: 1.5em;
     }
 }
 
-/* screens smaller than 480px */
+/* For mobile phones */
 @media (max-width: 480px) {
-    .box{
-        flex:1 1 100%;
+    .navbar img {
+        width: 100px; 
+    }
+    .main {
+        padding: 10px;
     }
 }

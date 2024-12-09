@@ -79,4 +79,11 @@
             // Simple validation checks
             if (!visitId || !patientId || !acuity || !reasonForVisit) {
                 alert('Please fill out all fields.');
-                return fals
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+    </script>
+</body>
+</html>

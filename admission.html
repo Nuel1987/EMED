@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admissions Dashboard</title>
-    <link rel="stylesheet" href="css/styles4.css"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="css/styles4.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
     <header>
         <div class="navbar">
             <img src="images/logo1.png" width="150" height="60">
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="login.html">Admin</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -27,12 +26,12 @@
             <h1>Admissions Dashboard</h1>
         </header>
 
-<!-- Filter/Search Input -->
-    <section class="filter-section">
-        <label for="filter-input">Search Admissions:</label>
-        <input type="text" id="filter-input" placeholder="Search by any field...">
-        <button class="search" type="submit">::Search::</button>
-    </section>
+        <!-- Filter/Search Input -->
+        <section class="filter-section">
+            <label for="filter-input">Search Admissions:</label>
+            <input type="text" id="filter-input" placeholder="Search by any field...">
+            <button class="search" type="submit">::Search::</button>
+        </section>
 
         <!-- Appointment Booking Form -->
         <section class="appointment-form-section">
@@ -85,7 +84,7 @@
                         <th>Admission Date</th>
                         <th>Service</th>
                         <th>Primary Diagnosis</th>
-                        <th>time</th>
+                        <th>Consultation Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,47 +93,63 @@
             </table>
         </section>
     </div>
-
-    <!-- Script to handle form submission and table updates -->
-    <script>
-        const form = document.getElementById('appointment-form');
-        const table = document.getElementById('admissions').getElementsByTagName('tbody')[0];
-        let admissionId = 1; // Mock auto-increment for local demo
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Gather form data
-            const patientId = document.getElementById('patient_id').value;
-            const admissionDate = document.getElementById('admission_date').value;
-            const service = document.getElementById('service').value;
-            const primaryDiagnosis = document.getElementById('primary_diagnosis').value;
-
-            // Insert new row in admissions table
-            const newRow = table.insertRow();
-            newRow.innerHTML = `
-                <td>${admissionId++}</td>
-                <td>${patientId}</td>
-                <td>${admissionDate}</td>
-                <td>${service}</td>
-                <td>${primaryDiagnosis}</td>
-            `;
-
-            // Clear the form after submission
-            form.reset();
-        });
-    </script>
-
-<footer>
-    <div class="footer-content">
-        <div id="contact" class="section"></div>
+    
+    <footer>
+        <div class="footer-content">
+            <div id="contact" class="section"></div>
             <p>Contact Us <br>+233249126494<br>+233203584285</p>
         </div>
         <p>&copy; 2024 KobbyNuel eMed. All rights reserved.</p>
         <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
-    </div>
-</footer>
+    </footer>
 
+    <script>
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            // Gather form data
+            const patient_id = document.getElementById('patient_id').value;
+            const admission_date = document.getElementById('admission_date').value;
+            const service = document.getElementById('service').value;
+            const primary_diagnosis = document.getElementById('primary_diagnosis').value;
+            const consultation_time = document.getElementById('consultation_time').value;
+    
+            // Validate the form inputs (optional, add more if necessary)
+            if (!patient_id || !admission_date || !service || !primary_diagnosis || !consultation_time) {
+                alert('Please fill in all the required fields.');
+                return;
+            }
+    
+            // Send the data to the server via POST
+            fetch('/auth/admissions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    patient_id,
+                    admission_date,
+                    service,
+                    primary_diagnosis,
+                    consultation_time
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Admission booked successfully!');
+                    // Optionally, reset the form or update the admissions table dynamically
+                    document.getElementById('appointment-form').reset();
+                } else {
+                    alert('Failed to book admission: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                alert('An error occurred while submitting the form.');
+            });
+        });
+    </script>
+    
 </body>
 </html>
-
